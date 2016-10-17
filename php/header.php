@@ -12,10 +12,12 @@
   <li><a href="galerie.php">Galerie</a></li>
   	<?php
   	if ($_SESSION['rank'] === '0' || !$_SESSION['rank'])
+    {
   		echo  "<li class=\"right\"><a href=\"inscription.php\">Inscription</a></li>";
+      echo "<li class=\"right\"><a href=\"connexion.php\">Connexion</a></li>";
+    }
   	if ($_SESSION['rank'] === '1')
   	{
-  		echo "<li class =\"right\"><a href=\"connexion.php\">Connexion</a></li>";
   		echo "<li class=\"right\"><a href=\"profil.php\">Profil</a></li>";
       echo "<li class =\"right\"><a href=\"deconnexion.php\">Deconnexion</a></li>";
 	   }
