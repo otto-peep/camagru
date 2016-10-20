@@ -28,7 +28,9 @@ CREATE TABLE `usr` (
   `id_usr` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `login` varchar(15) NOT NULL,
   `passwd` char(64) NOT NULL,
-  `mail` varchar(40) NOT NULL
+  `mail` varchar(40) NOT NULL,
+  `cle` char(32) NOT NULL,
+  `conf` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

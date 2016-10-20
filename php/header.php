@@ -11,14 +11,14 @@
   <li><a href="accueil.php">Accueil</a></li>
   <li><a href="galerie.php">Galerie</a></li>
   	<?php
-  	if ($_SESSION['rank'] === '0' || !$_SESSION['rank'])
+  	if ($_SESSION['rank'] === 0 || !$_SESSION['rank'])
     {
   		echo  "<li class=\"right\"><a href=\"inscription.php\">Inscription</a></li>";
       echo "<li class=\"right\"><a href=\"connexion.php\">Connexion</a></li>";
     }
-  	if ($_SESSION['rank'] === '1')
+  	if ($_SESSION['rank'] === 1)
   	{
-  		echo "<li class=\"right\"><a href=\"profil.php\">Profil</a></li>";
+  		echo "<li class=\"right\"><a href=\"compte.php\">Compte</a></li>";
       echo "<li class =\"right\"><a href=\"deconnexion.php\">Deconnexion</a></li>";
 	   }
 	?>

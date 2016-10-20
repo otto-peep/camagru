@@ -1,5 +1,5 @@
 <?php
-	include 'database.php';
+	include_once'database.php';
 	try
 	{
 		$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
@@ -21,8 +21,10 @@
 	$usr = "CREATE TABLE `usr` (
 			  `id_usr` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			  `login` varchar(15) NOT NULL,
-			  `passwd` char(64) NOT NULL,
-			  `mail` varchar(40) NOT NULL
+			  `passwd` char(128) NOT NULL,
+			  `mail` varchar(40) NOT NULL,
+			  `cle` char(32) NOT NULL,
+  				`conf` int(2) NOT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 	
 	$com = "CREATE TABLE `com` (
@@ -47,7 +49,7 @@
 			  `id_img` int(10) UNSIGNED NOT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
-	$root_usr = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`) VALUES (NULL, 'pconin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'pconin@gmail.com');";
+	$root_usr = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`) VALUES (NULL, 'pconin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'pconin@student.42.fr');";
 
 	// create db
 	try

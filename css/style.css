@@ -1,0 +1,17 @@
+.boxcam {
+    margin: 0px left;
+    width: 500px;
+    height: 375px;
+    border: 10px #300 solid;
+}
+#webcam {
+    width: 500px;
+    height: 375px;
+    background-color: #600;
+}
+#capture{
+	margin: auto;
+}
+#canvas{
+	border: 10px #300 solid;
+}
