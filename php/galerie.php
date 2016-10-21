@@ -1,5 +1,7 @@
 <?php
-	if ($_SESSION['rank'] === 1) // a modifier
+	if (!isset($_SESSION))
+		session_start();
+	if ($_SESSION['rank'] !== 1)
 	{
 		header("refresh:5;url=connexion.php");
 		echo "Vous devez d'abord vous connecter. Vous allez etre redirigé";

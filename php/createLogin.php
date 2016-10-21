@@ -7,7 +7,7 @@
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$login = $_POST['login'];
-		if(!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 40)
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 40 || strlen($password) > 30)
 		{
 			header("refresh:3;url=inscription.php");
 			echo "L'adresse email n'est pas correcte";
@@ -47,6 +47,7 @@
 			$entete = "From: noreply@camagru.fr";
 			mail($destinataire, $sujet, $message, $entete);
 			header ("refresh:3;url=connexion.php");
+			echo $destinataire;
 			echo "Votre compte a été créé avec succès. Vous allez recevoir un mail de confirmation. <br/>
 					Vous allez maintenant être redirigé vers la page de connexion";
 		}

@@ -49,7 +49,7 @@
 			  `id_img` int(10) UNSIGNED NOT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
-	$root_usr = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`) VALUES (NULL, 'pconin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'pconin@student.42.fr');";
+	$root_usr = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`, `cle`, `conf`) VALUES (NULL, 'pconin', '74dfc2b27acfa364da55f93a5caee29ccad3557247eda238831b3e9bd931b01d77fe994e4f12b9d4cfa92a124461d2065197d8cf7f33fc88566da2db2a4d6eae', 'pconin@student.42.fr', '1', '1');";
 
 	// create db
 	try

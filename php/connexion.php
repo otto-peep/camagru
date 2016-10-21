@@ -25,6 +25,7 @@
 			$req->bindValue('passwd', $password, PDO::PARAM_STR);
 			$req->setFetchMode(PDO::FETCH_OBJ);
 			$req->execute();
+			$results = $req->fetch();
 			if ($req->rowCount() != 1)
 			{
 				header("refresh:5;url=connexion.php");
@@ -35,6 +36,8 @@
 			{
 				$_SESSION['login'] = $login;
 				$_SESSION['rank'] = 1;
+				$_SESSION['mail'] = $results->mail;
+				$_SESSION['id_usr'] = $results->id_usr;
 				header("refresh:3;url=accueil.php");
 				echo "<h1>Bienvenue ".$login." Vous allez être redirigé vers l'accueil!</h1>";
 
