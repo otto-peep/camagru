@@ -18,6 +18,7 @@
     }
   	if ($_SESSION['rank'] === 1)
   	{
+      echo "<li class=\"center\">Bonjour ".$_SESSION['login']." bienvenue sur Camagru</li>";
   		echo "<li class=\"right\"><a href=\"compte.php\">Compte</a></li>";
       echo "<li class =\"right\"><a href=\"deconnexion.php\">Deconnexion</a></li>";
 	   }

@@ -24,6 +24,8 @@ ul.topnav li a.visited {background-color: #4CAF50;}
 
 ul.topnav li.right {float: right;}
 
+ul.topnav li.center {float: center; margin-top: 14px; color: grey; font-style: italic;}
+
 @media screen and (max-width: 600px){
     ul.topnav li.right,
     ul.topnav li {float: none;}
