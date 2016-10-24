@@ -14,3 +14,17 @@
   border-radius: 15px;
   background: #00dd00 ;    /* green */ 
   }
+
+.glr{
+  display:inline-block;
+  margin-right: 5%;
+}
+
+.img_glr{
+    height: auto;
+    width: 20%;
+  }
+
+  .desc_glr{
+    display: none;
+  }

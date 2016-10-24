@@ -19,14 +19,16 @@
 		<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<?php include_once 'header.php' ?>
+<?php include_once 'header.php'; ?>
 <div class="boxcam">
-    <input type="file" accept="image/*;capture=camera">
-    <input type="button" id="capture" value="Prendre une photo" onclick="TakePicture();">
+<form method="post" action="upload.php" enctype="multipart/form-data">
+    <input type="file" name = "img_upload" id="img_upload">
+    <input type="submit" value="upload" name="upload">
+</form>
 </div>
 
+<?php include_once 'mosaique.php'; ?>
 <script type="text/javascript">
-
 
 </script>
 </body>
