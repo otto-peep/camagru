@@ -51,6 +51,9 @@
 
 	$root_usr = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`, `cle`, `conf`) VALUES (NULL, 'pconin', '74dfc2b27acfa364da55f93a5caee29ccad3557247eda238831b3e9bd931b01d77fe994e4f12b9d4cfa92a124461d2065197d8cf7f33fc88566da2db2a4d6eae', 'pconin@student.42.fr', '1', '1');";
 
+	$img_ville = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', NOW(), 'Ville de paris');";
+	
+
 	// create db
 	try
 	{
@@ -79,6 +82,7 @@
 	try
 	{
 		$db->exec($root_usr);
+		$db->exec($img_ville);
 	}
 	catch (PDOException $e)
 	{

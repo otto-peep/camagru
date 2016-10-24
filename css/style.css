@@ -1,17 +1,16 @@
-.boxcam {
-    margin: 0px left;
-    width: 500px;
-    height: 375px;
-    border: 10px #300 solid;
-}
-#webcam {
-    width: 500px;
-    height: 375px;
-    background-color: #600;
-}
-#capture{
-	margin: auto;
-}
-#canvas{
-	border: 10px #300 solid;
-}
+.camcontent{
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 480px;
+  margin: auto;
+  }
+.cambuttons button {
+  border-radius: 15px;
+  font-size: 18px;
+  }
+.cambuttons button:hover {
+  cursor: pointer;
+  border-radius: 15px;
+  background: #00dd00 ;    /* green */ 
+  }
