@@ -1,13 +1,6 @@
 <?php
 	if (!isset($_SESSION))
 		session_start();
-	
-	if ($_SESSION['rank'] !== 1)
-	{
-		header("refresh:1;url=connexion.php");
-		echo "Vous devez d'abord vous connecter. Vous allez etre redirigé";
-		exit();
-	}
 	include_once '../config/logDB.php';
 	include_once 'functions.php';
 	$req = $dbh->prepare("SELECT * FROM img ORDER BY date_img DESC;");
@@ -22,16 +15,50 @@
 		// $log->execute();
 		// $r = $log->fetch();
 		$login = get_login($results->id_usr);
-		$com = get_com($results->id_img);
 		$likes = get_like($results->id_img);
+		$islike = is_like($results->id_img, $results->id_usr);
 		echo "
 				<img class='img_glr' onclick=\"affCom(".$results->id_img.");\" id=img_".$results->id_img." src='",$results->path_img,"'/><br/>
 				<div class='desc_glr' id='desc_".$results->id_img."'>",
-				$results->description, "<br/>", $login, "<br/>", $results->date_img, "<br/>", $likes, " likes <br/>",
+
+				//lien image taille reelle
+				"<a href=",$results->path_img,"><button type=\"button\">Taille reelle</button></a><br/>";
+
+				//supprimer image
+				if ($results->id_usr === $_SESSION['id_usr'])
+				{
+					echo "<form action= \"delImg.php\" method=\"post\">",
+					"<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
+					"<input type=\"submit\" id=\"delImg\" name=\"delImg\" value=\"Supprimer cette image (DEFINITIF)\">",
+					"</form>";
+				
+				}
+				//partie like
+				echo "<form action= \"like.php\" method=\"post\">";
+				if ($islike === TRUE) // boutton dislike
+					echo "<input type=\"submit\" id=\"like\" name=\"like\" value=\"like\">";
+				else // button like
+					echo "<input type=\"submit\" id=\"dislike\" name=\"dislike\" value=\"dislike\">";
+				echo "<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
+
+				"</form>",
+
+				//affichage commentaire et description
+				$results->description, "<br/>", $login, "<br/>", $results->date_img, "<br/>", $likes, " likes <br/><br/>",
+				
+				"<div class='com_glr'>", get_com($results->id_img), "</div>",
+				
+				//ajout commentaire
+				"<form action= \"commentaires.php\" method=\"post\">",
+				"<input type=\"text\" id=\"com\" name=\"com\" placeholder=\"entrez votre commentaire\" maxlength=\"255\">",
+				"<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
+				"<input type=\"submit\" id=\"addCom\" name=\"addCom\" value=\"Poster\">",
+				"</form>",
+
+
 				"</div><br/>"
 
 				;
-	//	print_r($results);
 	}
 	echo "</div>";
 ?>
