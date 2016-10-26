@@ -16,6 +16,9 @@
 		$log = $dbh->prepare("DELETE FROM `img` WHERE `img`.`id_img` = :id_img;");
 		$log->bindValue('id_img', $_POST['id_img'], PDO::PARAM_INT);
 		$log->execute();
+		$log = $dbh->prepare("DELETE FROM `likes` WHERE `likes`.`id_img` = :id_img;");
+		$log->bindValue('id_img', $_POST['id_img'], PDO::PARAM_INT);
+		$log->execute();
 		header("refresh:1;url=galerie.php");
 		echo "Votre image a bien été supprimée. Vous allez etre redirigé";
 		exit();	

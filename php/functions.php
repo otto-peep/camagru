@@ -23,10 +23,11 @@
 			//boutton supprimer commentaire
 			if ($_SESSION['id_usr'] === $results->id_usr)
 			 {
-			// 	echo "<form action= \"delCom.php\" method=\"post\">",
-			// 	"<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
-			// 	"<input type=\"hidden\" id=\"id_com\" name=\"id_com\" value=\"",$results->id_com,"\">",
-			// 	"<input type=\"submit\" id=\"delCom\" name=\"delCom\" value=\"del\">";
+			 	echo "<form action= \"delCom.php\" method=\"post\">",
+			 	"<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
+			 	"<input type=\"hidden\" id=\"id_com\" name=\"id_com\" value=\"",$results->id_com,"\">",
+			 	"<input type=\"submit\" id=\"delCom\" name=\"delCom\" value=\"del\">",
+			 	"</form>";
 			}
 
 			//afficher commentaire

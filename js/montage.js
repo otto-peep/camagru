@@ -1,0 +1,66 @@
+(function() {
+
+  var streaming = false,
+      video        = document.querySelector('#video'),
+      cover        = document.querySelector('#cover'),
+      canvas       = document.querySelector('#canvas'),
+      photo        = document.querySelector('#photo'),
+      capture  = document.querySelector('#capture'),
+      width = 600,
+      height = 0;
+
+  navigator.getMedia = ( navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia || //selon navigateur
+                         navigator.mozGetUserMedia ||
+                         navigator.msGetUserMedia);
+
+  navigator.getMedia(
+    {
+      video: true,
+      audio: false
+    },
+    function(stream) { //flux recuperé dans cette fonction
+      if (navigator.mozGetUserMedia) {  // pour mozilla
+         video.mozSrcObject = stream;
+      } else {
+        var vendorURL = window.URL || window.webkitURL; //autre navigateurs -> on cree un objet url
+        video.src = vendorURL.createObjectURL(stream);
+      }
+      video.play(); 
+    },
+    function(err) {
+      console.log("An error occured! " + err);
+    }
+  );
+
+  video.addEventListener('canplay', function(ev){
+    if (!streaming) {
+      height = video.videoHeight / (video.videoWidth/width);
+      video.setAttribute('width', width);
+      video.setAttribute('height', height);
+      canvas.setAttribute('width', width);
+      canvas.setAttribute('height', height);
+      streaming = true;
+    }
+  }, false);
+
+  function takepicture() {
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+    var data = canvas.toDataURL('image/jpeg');
+    console.log(data);
+    var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "saveimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
+    xhttp.setRequestHeader('Content-Type', 'image/jpeg');
+    xhttp.send('data=' + data); 
+    //photo.setAttribute('src', data);
+  }
+
+  capture.addEventListener('click', function(ev){
+      takepicture();
+    ev.preventDefault();
+  }, false);
+
+})();
