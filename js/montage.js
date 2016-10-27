@@ -48,14 +48,14 @@
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/jpeg');
+    var data = canvas.toDataURL('image/png');
     console.log(data);
     var xhttp;
     xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "saveimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
-    xhttp.setRequestHeader('Content-Type', 'image/jpeg');
-    xhttp.send('data=' + data); 
-    //photo.setAttribute('src', data);
+    xhttp.open("POST", "../php/mergeimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.send('fileToUpload=' + data); 
+    photo.setAttribute('src', data);
   }
 
   capture.addEventListener('click', function(ev){

@@ -6,7 +6,6 @@
 		header ('Location: accueil.php');
 		exit();
 	}
-	header("refresh:3;url=montage.php");
 	$target_dir = "../img/";
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
@@ -39,7 +38,7 @@
 	    $uploadOk = 0;
 	}
 	if (!isset($_POST['filter'])){
-		echo "You have to chosse a filter";
+		echo "You have to choose a filter";
 		$uploadOk = 0;
 	}
 	// Check if $uploadOk is set to 0 by an error
@@ -49,21 +48,11 @@
 	} else {
 
 // Ajout du filtre
-
-		if ($_POST['filter'] === 'griffes')
-		{
-			$filter = imagecreatefrompng("../effects/griffes.png");
-			imagecopymerge($target_file, $filter, 0, 0, 0, 0, 100, 47, 75);
-
-			echo "Griffes";
-
-		}
-
-
-	    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-	    } else {
-	        echo "Sorry, there was an error uploading your file.";
-	    }
+		include 'mergeimg.php';
+	    // if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+	    //     echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	    // } else {
+	    //     echo "Sorry, there was an error uploading your file.";
+	    // }
 	}
 ?>
