@@ -18,17 +18,18 @@
 	<?php include_once 'header.php' ?>
 	<form action="checkfile.php" method="post" enctype="multipart/form-data">
     Select image to upload: <br/>
-    <input type="radio" name="filter" value="nofilter"> Sans filtre <br/>
-    <input type="radio" name="filter" value="griffes"> Griffes rouges <br/>
-    <input type="radio" name="filter" value="Filtre3"> Filtre 3 <br/>
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-	</form>
+    <input type="radio" onclick="disable()" name="filter" value="nofilter"> Sans filtre <br/>
+    <input type="radio" onclick="disable()" name="filter" value="griffes"> Griffes rouges <br/>
+    <input type="radio" onclick="disable()" name="filter" value="Filtre3"> Filtre 3 <br/>
+    <input type="file" id="fileToUpload" name="fileToUpload" id="fileToUpload">
+    <input type="submit" disabled="disabled" id="upload" value="Upload" name="submit"><br/>
 	<video id="video"></video>
 	<button id="capture">Snapshot</button>
+	
 	<br/>
+	</form>
 	<canvas id="canvas"></canvas>
-	<img src="http://placekitten.com/" id="photo" alt="photo">
+	<?php include_once 'usrmosaique.php'; ?>
 <script type="text/javascript" src="../js/montage.js"></script>
 </body>
 </html>

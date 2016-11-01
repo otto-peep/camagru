@@ -35,3 +35,7 @@
     color:blue;
     margin-left: 10px;
 };
+
+#canvas{
+  display: none;
+}

@@ -11,10 +11,17 @@
 	print_r($_FILES);
 	echo "<br/>";
 	print_r ($_POST);
-
-	//readfile($_FILES['fileToUpload']['tmp_name']);
 	
-	if (isset($_POST['fileToUpload']))
+	if (isset($_FILES['fileToUpload']))
+	{
+		$img = (isset($_FILES["fileToUpload"]["tmp_name"])) ? htmlentities($_FILES["fileToUpload"]["tmp_name"]) : NULL;
+	    $img = preg_replace('/\s/', '+', $img);
+	    list($type, $data) = explode(';', $img);
+	    list(, $data) = explode(',', $data);
+	    $data = base64_decode($data);
+	    file_put_contents('../tmp/tmp1.png', $_FILES["fileToUpload"]["tmp_name"]);
+	}
+	else if (isset($_POST['fileToUpload']))
 	{
 		$img = (isset($_POST['fileToUpload'])) ? htmlentities($_POST['fileToUpload']) : NULL;
 	    $img = preg_replace('/\s/', '+', $img);
@@ -25,14 +32,27 @@
 	}
 	else
 	{
-		move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "../tmp/tmp1.png");
+		echo "ERROR NO FILES";
+		exit ();
 	}
 	$im = imagecreatefrompng('../tmp/tmp1.png');
-	header('Content-Type: image/png');
+	//if ($_POST['filter'] === 'griffes')
+		$filter = imagecreatefrompng('../effects/troll.png');
+	//else
+	//	echo "NO FILTER SELECTED";
+	imagecopyresampled($im, $filter, 300, 225, 0, 0, imagesx($filter), imagesy($filter), imagesx($filter), imagesy($filter));  
+	ob_start();
 	imagepng($im);
-	$filter = imagecreatefrompng('../effects/griffes.png');
-	imagecopymerge($im, $filter, 0, 0, 0, 0, imagesx($filter), imagesy($filter), 50);
-	$imagepng($im, '../img/montage.png');
-	$imagedestroy($im);
-	$imagedestroy($filter);
+	$data = ob_get_clean();
+	$filename = '../img/'.$_SESSION['login'].date("m.d.y.H.i.s").".png";
+	include '../config/logDB.php';
+	$req = $dbh->prepare("INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, :path_img, :id_usr, NOW(), :description)");
+	$req->bindValue('path_img', $filename, PDO::PARAM_STR);
+	$req->bindValue('description', "description", PDO::PARAM_STR);
+	$req->bindValue('id_usr', $_SESSION['id_usr'], PDO::PARAM_STR);
+	$req->setFetchMode(PDO::FETCH_OBJ);
+	$req->execute();
+	file_put_contents($filename, $data);
+	imagedestroy($im);
+	imagedestroy($filter);
 ?>

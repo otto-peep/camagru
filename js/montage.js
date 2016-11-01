@@ -1,4 +1,4 @@
-(function() {
+
 
   var streaming = false,
       video        = document.querySelector('#video'),
@@ -6,9 +6,11 @@
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
       capture  = document.querySelector('#capture'),
+      upload  = document.querySelector('#Upload'),
       width = 600,
       height = 0;
 
+  capture.disabled=true;
   navigator.getMedia = ( navigator.getUserMedia ||
                          navigator.webkitGetUserMedia || //selon navigateur
                          navigator.mozGetUserMedia ||
@@ -44,23 +46,23 @@
     }
   }, false);
 
-  function takepicture() {
+  function takePicture() {
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
-    console.log(data);
+    //console.log(data);
     var xhttp;
     xhttp = new XMLHttpRequest();
     xhttp.open("POST", "../php/mergeimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send('fileToUpload=' + data); 
-    photo.setAttribute('src', data);
+    location.reload();
+    console.log('REFRESH');
   }
 
-  capture.addEventListener('click', function(ev){
-      takepicture();
-    ev.preventDefault();
-  }, false);
-
-})();
+function disable(){
+    document.querySelector('#capture').disabled=false;
+    document.getElementById("upload").disabled =null;
+    console.log("hello");
+  }

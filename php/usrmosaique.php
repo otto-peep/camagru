@@ -3,36 +3,18 @@
 		session_start();
 	include_once '../config/logDB.php';
 	include_once 'functions.php';
-	
-	// initialisation pagination
-	$ppp = 5; // pictures per pages
-	$req = $dbh->prepare("SELECT COUNT(*) AS total FROM img;");
-	$req->setFetchMode(PDO::FETCH_OBJ);
-	$req->execute();
-	$results=$req->fetch();
-	$total = $results->total; //total img
-	$nbpages = ceil($total/$ppp);
-	if (isset($_GET['page']))
-	{
-		$page = intval($_GET['page']);
-		if ($page > $nbpages)
-			$page = $nbpages;
-	}
-	else
-	{
-		$page = 1;
-	}
-	$firstimg = $ppp * ($page - 1);
-
-	//request all images
-	$req = $dbh->prepare("SELECT * FROM img ORDER BY date_img DESC LIMIT :firstimg, :lastimg;");
-	$req->bindValue('firstimg', $firstimg, PDO::PARAM_INT);
-	$req->bindValue('lastimg', $firstimg + 5, PDO::PARAM_INT);
+	$req = $dbh->prepare("SELECT * FROM img WHERE id_usr = :id_usr ORDER BY date_img DESC;");
+	$req->bindValue('id_usr', $_SESSION['id_usr'], PDO::PARAM_STR);
 	$req->setFetchMode(PDO::FETCH_OBJ);
 	$req->execute();
 	echo "<div class='glr'>";
 	while ($results = $req->fetch())
 	{
+		// $log = $dbh->prepare("SELECT login FROM usr WHERE id_usr = :id_usr;"); //
+		// $log->bindValue('id_usr', $results->id_usr, PDO::PARAM_INT);
+		// $log->setFetchMode(PDO::FETCH_OBJ);
+		// $log->execute();
+		// $r = $log->fetch();
 		$login = get_login($results->id_usr);
 		$likes = get_like($results->id_img);
 		$islike = is_like($results->id_img, $results->id_usr);
@@ -79,16 +61,7 @@
 
 				;
 	}
-	echo "Page ";
-	for ($i=1; $i<=$nbpages; $i++)
-	{
-		if ($i === $page)
-			echo '('.$i.')';
-		else
-			echo '<a href="galerie.php?page='.$i.'">'.$i.'</a> ';
-	}
 	echo "</div>";
-	
 ?>
 
 <script type="text/javascript" src="../js/galerie.js"></script>

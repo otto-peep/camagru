@@ -30,3 +30,7 @@ ul.topnav li.center {float: center; margin-top: 14px; color: grey; font-style: i
     ul.topnav li.right,
     ul.topnav li {float: none;}
 }
+
+.foot{
+    margin-bottom: 10px;
+}
