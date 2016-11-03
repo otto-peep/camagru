@@ -5,7 +5,7 @@
 	include_once 'functions.php';
 	
 	// initialisation pagination
-	$ppp = 5; // pictures per pages
+	$ppp = 9; // pictures per pages
 	$req = $dbh->prepare("SELECT COUNT(*) AS total FROM img;");
 	$req->setFetchMode(PDO::FETCH_OBJ);
 	$req->execute();
@@ -23,25 +23,35 @@
 		$page = 1;
 	}
 	$firstimg = $ppp * ($page - 1);
-
+	$tmp = $firstimg + $ppp;
+	echo $firstimg, 'et', $tmp;
 	//request all images
 	$req = $dbh->prepare("SELECT * FROM img ORDER BY date_img DESC LIMIT :firstimg, :lastimg;");
 	$req->bindValue('firstimg', $firstimg, PDO::PARAM_INT);
-	$req->bindValue('lastimg', $firstimg + 5, PDO::PARAM_INT);
+	$req->bindValue('lastimg', $firstimg + $ppp, PDO::PARAM_INT);
 	$req->setFetchMode(PDO::FETCH_OBJ);
 	$req->execute();
 	echo "<div class='glr'>";
+	$i = 0;
 	while ($results = $req->fetch())
 	{
+		if ($i % 3 === 0)
+		{
+			echo "<div class=\"blockInline\">";
+		}
+		?>
+		<div class="contentBlock">
+		<?php
+		
 		$login = get_login($results->id_usr);
 		$likes = get_like($results->id_img);
 		$islike = is_like($results->id_img, $results->id_usr);
-		echo "
-				<img class='img_glr' onclick=\"affCom(".$results->id_img.");\" id=img_".$results->id_img." src='",$results->path_img,"'/><br/>
+		echo "	
+				<img class='img_glr' onclick=\"affCom(".$results->id_img.");\" id=img_".$results->id_img." src='",$results->path_img,"'/>
 				<div class='desc_glr' id='desc_".$results->id_img."'>",
 
 				//lien image taille reelle
-				"<a href=",$results->path_img,"><button type=\"button\">Taille reelle</button></a><br/>";
+				"<div class=\"buttonContent\"><a href=",$results->path_img,"><button type=\"button\">Taille reelle</button></a>";
 
 				//supprimer image
 				if ($results->id_usr === $_SESSION['id_usr'])
@@ -59,13 +69,17 @@
 				else // button like
 					echo "<input type=\"submit\" id=\"dislike\" name=\"dislike\" value=\"dislike\">";
 				echo "<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
-
-				"</form>",
+	
+				
+				"</form></div>",
 
 				//affichage commentaire et description
-				$results->description, "<br/>", $login, "<br/>", $results->date_img, "<br/>", $likes, " likes <br/><br/>",
+				"<div class='description'>",$results->description,"</div>",
+				"<div class='login'>",	$login, "</div>",
+				"<div class='date'>",$results->date_img, "</div>", 
+				"<div class='likes'>",$likes, " <img id='likeimg' src='../effects/like.png'> </div>",
 				
-				"<div class='com_glr'>", get_com($results->id_img), "</div>",
+				"<div class='com'>", get_com($results->id_img), "</div>",
 				
 				//ajout commentaire
 				"<form action= \"commentaires.php\" method=\"post\">",
@@ -75,11 +89,19 @@
 				"</form>",
 
 
-				"</div><br/>"
+				"</div>"
 
 				;
+		?>
+		</div>
+		<?php
+		if ($i % 3 === 2)
+		{
+			echo "</div>";
+		}
+		$i++;
 	}
-	echo "Page ";
+	echo "</div><div class=\"pageChange\">Page ";
 	for ($i=1; $i<=$nbpages; $i++)
 	{
 		if ($i === $page)

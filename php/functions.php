@@ -31,7 +31,7 @@
 			}
 
 			//afficher commentaire
-			echo $results->com."<br/>".get_login($results->id_usr)."<br/>".$results->date_com."<br/><br/>";
+			echo "<div class=com>",$results->com."<br/>".get_login($results->id_usr)."<br/>".$results->date_com."<br/><br/></div>";
 		}
 		return ($com);
 	}

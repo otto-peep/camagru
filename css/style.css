@@ -18,7 +18,6 @@
 /* Style GALERIE */
 
 .glr{
-  display:inline-block;
   margin-right: 5%;
 }
 
@@ -31,11 +30,102 @@
     display: none;
   }
 
-.com_glr{
-    color:blue;
-    margin-left: 10px;
-};
+
 
 #canvas{
   display: none;
+}
+
+body
+{
+  font-family: fantasy;
+    letter-spacing: 1px;
+}
+
+.glr
+{
+  width:100%;
+}
+
+.contentBlock
+{
+ width:33%;
+ min-width:33%;
+}
+
+.glr img
+{
+  width:80%;
+  margin:auto;
+  height:auto;
+  max-height:200px;
+  margin-left: 10%;
+}
+
+
+
+
+.blockInline
+{
+  display:flex;
+}
+
+h3
+{
+  text-align:center;
+}
+
+.buttonContent
+{
+  display:flex;
+}
+.buttonContent form
+{
+ margin-left:2%; 
+}
+
+.description{
+  font-size:22px;
+  line-height:26px;
+  margin-top:10px;
+}
+
+#com{
+ width:50%; 
+}
+
+#addCom
+{
+ margin-left:10px;
+}
+
+.like{
+  
+}
+
+.desc_glr
+{
+      width: 100%;
+  margin-left:10%;
+  margin-bottom:20px;
+}
+
+.date
+{
+  font-size:10px;
+}
+
+#likeimg
+{
+  height:20px;
+  margin-left:initial;
+  width:auto;
+  
+}
+
+.pageChange
+{
+  letter-spacing:1.5px;
+  margin-left:20px;
+  margin-top:20px;
 }

@@ -12,6 +12,11 @@
 </head>
 <body>
 	<?php include_once 'header.php' ?>
+	login: pconin
+	password: password
+
+	login: monsieurzer
+	password: helloworld
 	<?php include_once 'footer.php' ?>
 </body>
 </html>
