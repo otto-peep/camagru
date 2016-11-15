@@ -35,6 +35,8 @@
 	$i = 0;
 	while ($results = $req->fetch())
 	{
+		if ($i == 9)
+			break;
 		if ($i % 3 === 0)
 		{
 			echo "<div class=\"blockInline\">";
@@ -45,7 +47,7 @@
 		
 		$login = get_login($results->id_usr);
 		$likes = get_like($results->id_img);
-		$islike = is_like($results->id_img, $results->id_usr);
+		$islike = is_like($results->id_img, $_SESSION['id_usr']);
 		echo "	
 				<img class='img_glr' onclick=\"affCom(".$results->id_img.");\" id=img_".$results->id_img." src='",$results->path_img,"'/>
 				<div class='desc_glr' id='desc_".$results->id_img."'>",
@@ -58,7 +60,7 @@
 				{
 					echo "<form action= \"delImg.php\" method=\"post\">",
 					"<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
-					"<input type=\"submit\" id=\"delImg\" name=\"delImg\" value=\"Supprimer cette image (DEFINITIF)\">",
+					"<input type=\"submit\" id=\"delImg\" name=\"delImg\" value=\"Supprimer\">",
 					"</form>";
 				
 				}

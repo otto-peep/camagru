@@ -19,7 +19,7 @@
 
 .glr{
   margin-right: 5%;
-}
+}e
 
 .img_glr{
     height: auto;
@@ -38,6 +38,7 @@
 
 body
 {
+  font-size: calc(7px + 0.9vw);
   font-family: fantasy;
     letter-spacing: 1px;
 }
@@ -51,6 +52,7 @@ body
 {
  width:33%;
  min-width:33%;
+ max-width:33%;
 }
 
 .glr img
@@ -85,13 +87,15 @@ h3
 }
 
 .description{
-  font-size:22px;
+  font-size: calc(9px + 1.1vw);
   line-height:26px;
   margin-top:10px;
 }
 
-#com{
- width:50%; 
+.com{ 
+    width:50%; 
+    font-size: calc(5px + 0.7vw);
+    max-width:33%;
 }
 
 #addCom
@@ -112,7 +116,7 @@ h3
 
 .date
 {
-  font-size:10px;
+    font-size: calc(7px + 0.7vw);
 }
 
 #likeimg
@@ -128,4 +132,24 @@ h3
   letter-spacing:1.5px;
   margin-left:20px;
   margin-top:20px;
+}
+
+.title{
+  margin-top: 5%;
+  font-size: calc(9px + 0.9vw);
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.contenu{
+  margin-left: 3%;
+}
+
+.compte
+{
+  min-width: 80%;
+}
+
+#newpwd{
+  display: inline-block;
 }

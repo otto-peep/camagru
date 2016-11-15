@@ -51,13 +51,16 @@
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
+    canvas.setAttribute('src', data);
+    document.getElementById('toto').value = data;
+    document.forms['upload'].submit();
     //console.log(data);
-    var xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "../php/mergeimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
-    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhttp.send('fileToUpload=' + data); 
-    location.reload();
+    // var xhttp;
+    // xhttp = new XMLHttpRequest();
+    // xhttp.open("POST", "../php/mergeimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
+    // xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencodedca");
+    // xhttp.send('fileToUpload=' + data); 
+ //   location.reload();
     console.log('REFRESH');
   }
 

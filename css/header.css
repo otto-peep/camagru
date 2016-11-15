@@ -1,4 +1,18 @@
-.topbox {margin: 0;}
+footer
+{
+    left:0px;
+    bottom:10px;
+    height:25px;
+    font-size: 13px;
+    width:100%;
+    text-align: right;
+    margin-right: 40px; 
+    position: relative;
+}
+
+.topbox {
+    margin: 0;         
+}
 
 ul.topnav {
     list-style-type: none;
@@ -18,19 +32,14 @@ ul.topnav li a {
     text-decoration: none;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #111;}
-
-ul.topnav li a.visited {background-color: #4CAF50;}
-
 ul.topnav li.right {float: right;}
 
-ul.topnav li.center {float: center; margin-top: 14px; color: grey; font-style: italic;}
+ul.topnav li.center {float: center; text-align: center;
+ margin-top: 14px; color: grey; font-style: italic;}
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 850px){
     ul.topnav li.right,
     ul.topnav li {float: none;}
 }
 
-.foot{
-    margin-bottom: 10px;
-}
+

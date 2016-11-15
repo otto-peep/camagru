@@ -49,28 +49,14 @@
 			  `id_img` int(10) UNSIGNED NOT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
-	$root_usr = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`, `cle`, `conf`) VALUES (NULL, 'pconin', '74dfc2b27acfa364da55f93a5caee29ccad3557247eda238831b3e9bd931b01d77fe994e4f12b9d4cfa92a124461d2065197d8cf7f33fc88566da2db2a4d6eae', 'pconin@student.42.fr', '1', '1');";
+	$usr1 = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`, `cle`, `conf`) VALUES (NULL, 'pconin', '74dfc2b27acfa364da55f93a5caee29ccad3557247eda238831b3e9bd931b01d77fe994e4f12b9d4cfa92a124461d2065197d8cf7f33fc88566da2db2a4d6eae', 'pconin@student.42.fr', '1', '1');";
+
+	$usr2 = "INSERT INTO `usr` (`id_usr`, `login`, `passwd`, `mail`, `cle`, `conf`) VALUES (NULL, 'monsieurzer', '807fb49ba72ce04205dc9bbfbc3481f189f8b1730571b6f588001ec4f37b97e12bc8cefd03598dace3c1118221bf3af78a8f5958c0f59c848af9bc8a6034ea7e', 'pconin@gmail.com', '1', '1');";
+
 
 	$img_ville = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville2 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole2 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville3 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole3 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville4 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole4 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville5 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole5 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville6 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole6 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville7 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole7 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville8 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole8 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville9 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole9 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
-	$img_ville1 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ville.jpg', '1', '2014-05-23T14:25:10', 'Ville de paris');";
-	$img_ecole1 = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '1', '2016-04-23T14:25:10', 'Cluster 2');";
+	$img_ecole = "INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, '../img/ecole.jpg', '2', '2016-04-23T14:25:10', 'Cluster 2');";
+	
 
 	$com_ville1 = "INSERT INTO `com` (`id_com`, `id_usr`, `id_img`, `date_com`, `com`) VALUES (NULL, '1', '1', '2016-10-23T13:33:20', 'What a nice place!');";
 	$com_ville2 = "INSERT INTO `com` (`id_com`, `id_usr`, `id_img`, `date_com`, `com`) VALUES (NULL, '1', '1', '2016-10-25T13:33:20', 'Isnt it?');";
@@ -105,27 +91,10 @@
 	// insert data in table
 	try
 	{
-		$db->exec($root_usr);
+		$db->exec($usr1);
+		$db->exec($usr2);
 		$db->exec($img_ville);
 		$db->exec($img_ecole);
-			$db->exec($img_ville1);
-		$db->exec($img_ecole1);
-			$db->exec($img_ville2);
-		$db->exec($img_ecole2);
-			$db->exec($img_ville3);
-		$db->exec($img_ecole3);
-			$db->exec($img_ville4);
-		$db->exec($img_ecole4);
-			$db->exec($img_ville5);
-		$db->exec($img_ecole6);
-			$db->exec($img_ville6);
-		$db->exec($img_ecole7);
-			$db->exec($img_ville7);
-		$db->exec($img_ecole8);
-			$db->exec($img_ville8);
-		$db->exec($img_ecole9);
-			$db->exec($img_ville9);
-		$db->exec($img_ecole8);
 		$db->exec($com_ville1);
 		$db->exec($com_ville2);
 		$db->exec($like_ville1);

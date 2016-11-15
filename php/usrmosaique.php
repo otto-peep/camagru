@@ -34,32 +34,11 @@
 					"</form>";
 				
 				}
-				//partie like
-				echo "<form action= \"like.php\" method=\"post\">";
-				if ($islike === TRUE) // boutton dislike
-					echo "<input type=\"submit\" id=\"like\" name=\"like\" value=\"like\">";
-				else // button like
-					echo "<input type=\"submit\" id=\"dislike\" name=\"dislike\" value=\"dislike\">";
-				echo "<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
-
-				"</form>",
-
+				echo
 				//affichage commentaire et description
 				$results->description, "<br/>", $login, "<br/>", $results->date_img, "<br/>", $likes, " likes <br/><br/>",
 				
-				"<div class='com_glr'>", get_com($results->id_img), "</div>",
-				
-				//ajout commentaire
-				"<form action= \"commentaires.php\" method=\"post\">",
-				"<input type=\"text\" id=\"com\" name=\"com\" placeholder=\"entrez votre commentaire\" maxlength=\"255\">",
-				"<input type=\"hidden\" id=\"id_img\" name=\"id_img\" value=\"",$results->id_img,"\">",
-				"<input type=\"submit\" id=\"addCom\" name=\"addCom\" value=\"Poster\">",
-				"</form>",
-
-
-				"</div><br/>"
-
-				;
+				"<div class='com_glr'>", get_com($results->id_img), "</div>";
 	}
 	echo "</div>";
 ?>

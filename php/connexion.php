@@ -59,6 +59,7 @@
 	Identifiant: <input type="text" name="login" value="" placeholder="login"/> <br/>
 	Mot de passe: <input type="password" name="passwd" value="" placeholder="password"/>
 	<input type="submit" name="submit" value="OK">
-	</form>
+	</form><br/>
+	<a href="forgivepwd.php">Mot de passe oublié ?</a>
 </body>
 </html>
