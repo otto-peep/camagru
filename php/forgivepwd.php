@@ -52,6 +52,8 @@ include_once('header.php');
 <html>
 <head>
 	<title>Formulaire mdp oublié</title>
+		<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
 <form action="forgivepwd.php" method="post">

@@ -11,6 +11,8 @@
 <html>
 <head>
 	<title>Inscription camagru</title>
+		<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
 	<p> Bienvenue sur Camagru. Merci de renseigner les champs suivants pour vous enregistrer </p>

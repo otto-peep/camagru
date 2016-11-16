@@ -1,3 +1,7 @@
+<head>
+		<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/header.css">
+</head>
 <?php
 	header("refresh:2;url=accueil.php");
 	include_once 'header.php';

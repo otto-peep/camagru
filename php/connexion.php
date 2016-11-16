@@ -51,6 +51,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+		<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/header.css">
 	<title>Connexion Camagru</title>
 	
 </head>
