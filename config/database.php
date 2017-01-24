@@ -1,5 +1,5 @@
 <?php
 	$DB_DSN = 'mysql:host=localhost;';
 	$DB_USER = 'root';
-	$DB_PASSWORD = ''; // no password on cloud9
+	$DB_PASSWORD = 'root'; // no password on cloud9
 ?>
