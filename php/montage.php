@@ -31,6 +31,7 @@
 	<button id="capture">Snapshot</button>
 	<br/>
 	<canvas id="canvas"></canvas>
+	<?php include 'usrmosaique.php' ; ?>
 	<?php include 'footer.php' ;?>
 <script type="text/javascript" src="../js/montage.js"></script>
 </body>

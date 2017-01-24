@@ -7,7 +7,7 @@
 	$req->bindValue('id_usr', $_SESSION['id_usr'], PDO::PARAM_STR);
 	$req->setFetchMode(PDO::FETCH_OBJ);
 	$req->execute();
-	echo "<div class='glr'>";
+	echo "<div class='usrglr'>";
 	while ($results = $req->fetch())
 	{
 		// $log = $dbh->prepare("SELECT login FROM usr WHERE id_usr = :id_usr;"); //
@@ -19,7 +19,7 @@
 		$likes = get_like($results->id_img);
 		$islike = is_like($results->id_img, $results->id_usr);
 		echo "
-				<img class='img_glr' onclick=\"affCom(".$results->id_img.");\" id=img_".$results->id_img." src='",$results->path_img,"'/><br/>
+				<img class='img_usrglr' onclick=\"affCom(".$results->id_img.");\" id=img_".$results->id_img." src='",$results->path_img,"'/><br/>
 				<div class='desc_glr' id='desc_".$results->id_img."'>",
 
 				//lien image taille reelle
