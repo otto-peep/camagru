@@ -1,18 +1,32 @@
+console.log('js');
 
+function uploadPhoto(){
+    var filters = document.getElementsByName('filter');
+    for (var i = 0, length = filters.length; i < length; i++){
+      if (filters[i].checked){
+        console.log(filters[i].value);
+        document.getElementById('formUpload').submit();
+        return ;
+      }
+      else if (i == length - 1){
+        alert ('Vous devez selectionner un filtre!');
+        }
+    }
+};
+
+	(function() {
 
   var streaming = false,
       video        = document.querySelector('#video'),
       cover        = document.querySelector('#cover'),
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
-      capture  = document.querySelector('#capture'),
-      upload  = document.querySelector('#Upload'),
-      width = 600,
+      startbutton  = document.querySelector('#capture'),
+      width = 320,
       height = 0;
 
-  capture.disabled=true;
   navigator.getMedia = ( navigator.getUserMedia ||
-                         navigator.webkitGetUserMedia || //selon navigateur
+                         navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
                          navigator.msGetUserMedia);
 
@@ -21,14 +35,14 @@
       video: true,
       audio: false
     },
-    function(stream) { //flux recuperé dans cette fonction
-      if (navigator.mozGetUserMedia) {  // pour mozilla
-         video.mozSrcObject = stream;
+    function(stream) {
+      if (navigator.mozGetUserMedia) {
+        video.mozSrcObject = stream;
       } else {
-        var vendorURL = window.URL || window.webkitURL; //autre navigateurs -> on cree un objet url
+        var vendorURL = window.URL || window.webkitURL;
         video.src = vendorURL.createObjectURL(stream);
       }
-      video.play(); 
+      video.play();
     },
     function(err) {
       console.log("An error occured! " + err);
@@ -47,25 +61,43 @@
   }, false);
 
   function takePicture() {
+    var filters = document.getElementsByName('filter');
+    for (var i = 0, length = filters.length; i < length; i++){
+      if (filters[i].checked){
+        console.log(filters[i].value);
+        var filter = filters[i].value;
+      }
+    }
+    if (!filter){
+        return alert ('Vous devez selectionner un filtre!');
+    }
+    var desc = document.getElementById('desc').value;
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
-    canvas.setAttribute('src', data);
-    document.getElementById('toto').value = data;
-    document.forms['upload'].submit();
-    //console.log(data);
-    // var xhttp;
-    // xhttp = new XMLHttpRequest();
-    // xhttp.open("POST", "../php/mergeimg.php", true); //true = asynchrone, synchrone = attend reponse du serveur
-    // xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencodedca");
-    // xhttp.send('fileToUpload=' + data); 
- //   location.reload();
-    console.log('REFRESH');
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../php/mergeimg.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.response);
+            console.log(response);
+            if (response !== "ok") {
+                alert(response);
+            }
+            else{
+              location.reload();
+            }
+        }
+    };
+    xhr.send("description="+desc+"&filter="+ filter + "&image64=" + encodeURIComponent(data.replace("data:image/png;base64,", "")));
   }
 
-function disable(){
-    document.querySelector('#capture').disabled=false;
-    document.getElementById("upload").disabled =null;
-    console.log("hello");
-  }
+  startbutton.addEventListener('click', function(ev){
+      takePicture();
+    ev.preventDefault();
+  }, false);
+
+  
+})();

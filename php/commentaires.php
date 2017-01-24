@@ -11,10 +11,11 @@
 	if (isset($_POST['id_img']) && isset($_POST['com']) && isset($_POST['addCom']) && strlen($_POST['com'] < 255))
 	{
 		include '../config/logDB.php';
+		$com = htmlspecialchars($_POST['com']);
 		$log = $dbh->prepare("INSERT INTO `com` (`id_com`, `id_usr`, `id_img`, `date_com`, `com`) VALUES (NULL, :id_usr, :id_img, NOW(), :com);");
 		$log->bindValue('id_img', $_POST['id_img'], PDO::PARAM_INT);
 		$log->bindValue('id_usr', $_SESSION['id_usr'], PDO::PARAM_INT);
-		$log->bindValue('com', $_POST['com'], PDO::PARAM_STR);
+		$log->bindValue('com', $com, PDO::PARAM_STR);
 		$log->setFetchMode(PDO::FETCH_OBJ);
 		$log->execute();
 

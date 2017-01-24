@@ -6,52 +6,63 @@
 		header ('Location: accueil.php');
 		exit();
 	}
-	echo "This is checkfile";
-	print_r($_FILES);
-	echo "<br/>";
-	print_r ($_POST);
-
-
-	$target_dir = "../img/";
-	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	$_FILES['fileToUpload']['type'] = $imageFileType;
-	if (isset($_POST['submit']))
-	{
-		// Check if image file is a actual image or fake image
-		if(isset($_POST["submit"])) {
-		    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-		    if($check !== false) {
-		        echo "File is an image - " . $check["mime"] . ".";
-		        $uploadOk = 1;
-		    } else {
-		        echo "File is not an image.";
-		        $uploadOk = 0;
-		    }
-		}
-		// Check file size
-		if ($_FILES["fileToUpload"]["size"] > 500000) {
-		    echo "Sorry, your file is too large.";
-		    $uploadOk = 0;
-		}
-		// Allow certain file formats
-		if($imageFileType != "jpg" && $imageFileType != "png" ) {
-		    echo "Sorry, only JPG, PNG files are allowed.";
-		    $uploadOk = 0;
-		}
-		if (!isset($_POST['filter'])){
-			echo "You have to choose a filter";
-			$uploadOk = 0;
-		}
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
-		    echo "Sorry, your file was not uploaded.";
-		// if everything is ok, try to upload file
-		} else {
-			include 'mergeimg.php';
-		}
+	if ($_FILES['fileToUpload']['error']){
+		header("refresh:1;url=montage.php");
+		echo 'Erreur dans l\'upload du fichier';
+		exit ();
 	}
-	else
-		include 'mergeimg.php';
+	if ($_FILES['fileToUpload']['size'] > 400000){
+		header("refresh:1;url=montage.php");
+		echo 'Le fichier est trop volumineux';
+		exit ();
+	}
+	else if ($_FILES['fileToUpload']['type'] != 'image/png'){
+		header("refresh:1;url=montage.php");
+		echo 'Vous devez uploader un fichier au format png';
+		exit();
+	}
+	$b64 = base64_encode(file_get_contents($_FILES['fileToUpload']['tmp_name']));
+	$img = imagecreatefromstring(base64_decode($b64));
+	if ($img == false){
+		header("refresh:1;url=montage.php");
+		echo 'La creation de l\'image a echouee';
+		exit ();
+	}
+	if ($_POST['filter'] == 'griffes')
+		$filter = imagecreatefrompng('../effects/griffes.png');
+	else if ($_POST['filter'] == 'troll')
+		$filter = imagecreatefrompng('../effects/troll.png');
+	else if ($_POST['filter'] == 'thumbup')
+		$filter = imagecreatefrompng('../effects/like.png');
+	else{
+		header("refresh:1;url=montage.php");
+		echo 'Vous devez choisir un filtre';
+		exit();
+	}
+	$target_dir = "../img/";
+	$target_file = $target_dir . $_SESSION['login'].date("m.d.y.H.i.s").".png";
+	imageAlphaBlending($filter, true);
+	imageSaveAlpha($filter, true);
+	imagecopy($img, $filter, 0, 0, 0, 0, imagesx($filter), imagesy($filter));
+	imagepng($img, $target_file);
+	
+	ob_start();
+	imagepng($img);
+	ob_end_clean();
+	imagedestroy($img);
+	imagedestroy($filter);
+	include '../config/logDB.php';
+	$description = htmlspecialchars($_POST['description']);
+	if (strlen($description) > 200){
+		header("refresh:1;url=montage.php");
+		echo 'La description doit faire moins de 200 caracteres';
+		exit();
+	}
+	header ('Location: montage.php');
+	$req = $dbh->prepare("INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, :path_img, :id_usr, NOW(), :description)");
+	$req->bindValue('path_img', $target_file, PDO::PARAM_STR);
+	$req->bindValue('description', $description, PDO::PARAM_STR);
+	$req->bindValue('id_usr', $_SESSION['id_usr'], PDO::PARAM_STR);
+	$req->setFetchMode(PDO::FETCH_OBJ);
+	$req->execute();
 ?>

@@ -18,21 +18,19 @@
 <body>
 	<?php include_once 'header.php' ?>
 	
-	<form action="checkfile.php" method="post" enctype="multipart/form-data" name='upload'>
+	<form action="checkfile.php" method="post" enctype="multipart/form-data" id='formUpload' name='upload'>
     Select image to upload: <br/>
-    <input name="img" id="toto" hidden/>
-    <input type="text" maxlength="200" name="description" placeholder="description"> <br/>
-    <input type="radio" onclick="disable()" name="filter" value="nofilter"> Sans filtre <br/>
-    <input type="radio" onclick="disable()" name="filter" value="griffes"> Griffes rouges <br/>
-    <input type="radio" onclick="disable()" name="filter" value="Filtre3"> Filtre 3 <br/>
+    <input type="text" maxlength="200" id='desc' name="description" placeholder="description"> <br/>
+    <input type="radio" name="filter" value="thumbup"> Thumbup <br/>
+    <input type="radio" name="filter" value="griffes"> Griffes rouges <br/>
+    <input type="radio" name="filter" value="troll"> Trollface <br/>
     <input type="file"  value="fileToUpload" name="fileToUpload" id="fileToUpload">
-    <input type="submit" disabled="disabled" id="upload" value="Upload" name="submit"><br/>
+    </form>
+    <button onclick='uploadPhoto();'> Upload file</button><br/>
 	<video id="video"></video>
-	<button id="capture" onclick="takePicture()">Snapshot</button>
-	</form>
+	<button id="capture">Snapshot</button>
 	<br/>
 	<canvas id="canvas"></canvas>
-	<?php include_once 'usrmosaique.php'; ?>
 	<?php include 'footer.php' ;?>
 <script type="text/javascript" src="../js/montage.js"></script>
 </body>

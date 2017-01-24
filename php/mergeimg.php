@@ -6,54 +6,52 @@
 		header ('Location: accueil.php');
 		exit();
 	}
-	header ('Location: accueil.php');
-	function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct){ 
-	// function patch for respecting alpha work find on http://php.net/manual/fr/function.imagecopymerge.php
-	$cut = imagecreatetruecolor($src_w, $src_h); 
-	imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
-	imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
-	imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct); 
-} 
 
-	$filename = '../img/'.$_SESSION['login'].date("m.d.y.H.i.s").".png";
-	if ($_FILES['fileToUpload']['name'])
-	{
-	   move_uploaded_file($_FILES['fileToUpload']['tmp_name'], '../tmp/tmp1.png');
+	if (!$_POST['image64']){
+		echo json_encode('Vous devez envoyer une image');
+		exit();
 	}
-	else
-	{
-		echo "ERROR NO FILES";
-		exit ();
-	}
-
-	//create image from tmp file
-	if ($_FILES['fileToUpload']['type'] === 'image/jpg')
-		$im = imagecreatefromjpg('../tmp/tmp1.png');
-	else
-		$im = imagecreatefrompng('../tmp/tmp1.png');
-
-
 	//select right filter
-	if ($_POST['filter'] === 'griffes')
+	if ($_POST['filter'] == 'griffes')
 		$filter = imagecreatefrompng('../effects/griffes.png');
-	else
-		echo "NO FILTER SELECTED";
-
-	imagecopymerge_alpha($im, $filter, 0, 0, 0, 0, imagesx($filter), imagesy($filter), 100);
-	//imagecopyresampled($im, $filter, 300, 225, 0, 0, imagesx($filter), imagesy($filter), imagesx($filter), imagesy($filter));
-	imagepng($im);
-	imagepng($im, $filename);
-	imagedestroy($im);
-	imagedestroy($filter);
-
-
-
+	else if ($_POST['filter'] == 'troll')
+		$filter = imagecreatefrompng('../effects/troll.png');
+	else if ($_POST['filter'] == 'thumbup')
+		$filter = imagecreatefrompng('../effects/like.png');
+	else{
+		echo json_encode('Vous devez choisir un filtre');
+		exit();
+	}
+	$decodeImg = base64_decode($_POST['image64']);
+	$img = imagecreatefromstring($decodeImg);
+	if ($img == false){
+		echo json_encode('Erreur lors de la creation de l\'image');
+		exit();
+	}
+	$target_dir = "../img/";
+	$target_file = $target_dir . $_SESSION['login'].date("m.d.y.H.i.s").".png";
+	imageAlphaBlending($filter, true);
+	imageSaveAlpha($filter, true);
+	imagecopy($img, $filter, 0, 0, 0, 0, imagesx($filter), imagesy($filter));
+	imagepng($img, $target_file);
+	ob_start();
+	imagepng($img);
+	
+	ob_end_clean();
+	
+	// insertion dans la db
 	include '../config/logDB.php';
+	$description = htmlspecialchars($_POST['description']);
+	if (strlen($description) > 200){
+		echo json_encode('La description doit faire moins de 200 caracteres');
+		exit();
+	}
 	$req = $dbh->prepare("INSERT INTO `img` (`id_img`, `path_img`, `id_usr`, `date_img`, `description`) VALUES (NULL, :path_img, :id_usr, NOW(), :description)");
-	$req->bindValue('path_img', $filename, PDO::PARAM_STR);
-	$req->bindValue('description', $_POST['description'], PDO::PARAM_STR);
+	$req->bindValue('path_img', $target_file, PDO::PARAM_STR);
+	$req->bindValue('description', $description, PDO::PARAM_STR);
 	$req->bindValue('id_usr', $_SESSION['id_usr'], PDO::PARAM_STR);
 	$req->setFetchMode(PDO::FETCH_OBJ);
 	$req->execute();
-
+	echo json_encode('ok');
+	exit();
 ?>

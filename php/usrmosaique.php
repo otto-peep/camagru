@@ -38,7 +38,7 @@
 				//affichage commentaire et description
 				$results->description, "<br/>", $login, "<br/>", $results->date_img, "<br/>", $likes, " likes <br/><br/>",
 				
-				"<div class='com_glr'>", get_com($results->id_img), "</div>";
+				"<div class='com_glr'>", get_com($results->id_img), "</div></div>";
 	}
 	echo "</div>";
 ?>
