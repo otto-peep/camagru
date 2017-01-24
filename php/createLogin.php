@@ -19,6 +19,13 @@
 			echo "Le pseudo est trop long";
 			exit();
 		}
+		$escapeLogin = htmlspecialchars($login);
+		if ($escapeLogin !== $login){
+			header("refresh:3;url=inscription.php");
+			echo "Il y a des caracteres interdits dans le pseudo";
+			exit();			
+		}
+		$login = $escapeLogin;
 		$req = $dbh->prepare("SELECT * FROM usr WHERE login = :login || mail = :mail");
 		$req->bindValue('login', $login, PDO::PARAM_STR);
 		$req->bindValue('mail', $email, PDO::PARAM_STR);
