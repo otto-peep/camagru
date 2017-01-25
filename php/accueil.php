@@ -14,9 +14,6 @@
 <body>
 	<?php include 'header.php' ?>
 	<br/>
-	login: pconin
-	password: password
-	<br/>
 	login: monsieurzer
 	password: helloworld
 	<?php include 'footer.php' ?>

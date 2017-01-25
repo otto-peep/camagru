@@ -25,7 +25,7 @@
 	$img = imagecreatefromstring(base64_decode($b64));
 	if ($img == false){
 		header("refresh:1;url=montage.php");
-		echo 'La creation de l\'image a echouee';
+		echo 'La creation de l\'image a echouee ce n\'est pas une image';
 		exit ();
 	}
 	if ($_POST['filter'] == 'griffes')

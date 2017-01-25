@@ -25,7 +25,7 @@
 	$decodeImg = base64_decode($_POST['image64']);
 	$img = imagecreatefromstring($decodeImg);
 	if ($img == false){
-		echo json_encode('Erreur lors de la creation de l\'image');
+		echo json_encode('Erreur lors de la creation de l\'image, ceci n\'est pas une image');
 		exit();
 	}
 	$target_dir = "../img/";

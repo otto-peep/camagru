@@ -7,11 +7,17 @@
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$login = $_POST['login'];
-		if(!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 40 || strlen($password) > 30)
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 40)
 		{
 			header("refresh:3;url=inscription.php");
 			echo "L'adresse email n'est pas correcte";
 			exit();
+		}
+		else if (strlen($password) > 30 || strlen($password) < 6)
+		{
+			header("refresh:3;url=inscription.php");
+			echo "Le mot de passe n'est pas correct";
+			exit();			
 		}
 		else if (strlen($login) > 15)
 		{

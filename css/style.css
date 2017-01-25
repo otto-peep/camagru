@@ -38,8 +38,8 @@
 
 body
 {
+  font-family: Arial;
   font-size: calc(7px + 0.9vw);
-  font-family: fantasy;
     letter-spacing: 1px;
 }
 

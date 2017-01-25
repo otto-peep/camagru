@@ -6,7 +6,7 @@
 		header ('Location: accueil.php');
 		exit();
 	}
-	else if (!$_POST['oldpw'] || !$_POST['newpw'] || strlen($_POST['newpw']) > 30)
+	else if (!$_POST['oldpw'] || !$_POST['newpw'] || strlen($_POST['newpw']) > 30 || strlen($_POST['newpw'] < 6))
 	{
 		header ('refresh:3;url=compte.php');
 		echo "Nouveau mot de passe invalide, vous devez remplir les champs correctement.";
