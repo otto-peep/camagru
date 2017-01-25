@@ -12,7 +12,8 @@
 	$results=$req->fetch();
 	$total = $results->total; //total img
 	$nbpages = ceil($total/$ppp);
-	if (isset($_GET['page']) && is_int($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] < 1000)
+	$page = intval($_GET['page']);
+	if (isset($page) && is_int($page) && $page > 0 && $page < 1000)
 	{
 		$page = intval($_GET['page']);
 		if ($page > $nbpages)

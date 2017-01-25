@@ -13,9 +13,7 @@
 </head>
 <body>
 	<?php include 'header.php' ?>
-	<br/>
-	login: monsieurzer
-	password: helloworld
+
 	<?php include 'footer.php' ?>
 </body>
 </html>
